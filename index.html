@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>CS4241-B15 Homework Assignment 6</title>
+  <meta charset="utf-8">
+  <!--Author: Yuheng Huo-->
+</head>
+  <style>
+  progress {
+    position:fixed;
+    right:0;
+    top:15px;
+}
+#t01{
+  top:70px;
+}
+#t02{
+  top:190px;
+}
+#text{
+  text-align: center;
+}
+div {
+    border: 1px solid black;
+    background-color: lightblue;
+    height: 2000px;
+    width: 2000px;
+    cursor:pointer;
+}
+table{
+  position:fixed;
+  width: 10%;
+  border-collapse: collapse;
+}
+table,th,td{
+  border: 7px solid black;
+  background-color: white;
+}
+#bblue,#tblue{
+  background-color: blue;
+  cursor:pointer;
+}
+#bred,#tred{
+  background-color: red;
+  cursor:pointer;
+}
+#bgreen,#tgreen{
+  background-color: green;
+  cursor:pointer;
+}
+  </style>
+<body>
+<h1>Simple Color Picker</h1>
+<table id="t01">
+  <tr>
+    <th>Back Ground Color</th>
+  </tr>
+  <tr>
+    <td id = 'bblue'>Blue</td>
+  </tr>
+  <tr>
+    <td id = 'bgreen'>Green</td>
+  </tr>
+  <tr>
+    <td id = 'bred'>Red</td>
+  </tr>
+</table>
+<br>
+<table id="t02">
+  <tr>
+    <th>Text Color</th>
+  </tr>
+  <tr>
+    <td id = 'tblue'>Blue</td>
+  </tr>
+  <tr>
+    <td id = 'tgreen'>Green</td>
+  </tr>
+  <tr>
+    <td id = 'tred'>Red</td>
+  </tr>
+</table>
+<progress id = "progressbar" value ="0" max = "100">Process</progress>
+ <!--<div class="d1">1<br/><br/><br/>
+    <div class="d2">2<br/><br/><br/>
+        <div class="d3">3<br/><br/><br/>
+        </div>
+    </div>
+</div>-->
+<div id="page"><h1 id='text'>This is a Sample Text</h1></div>
+<h2>Result:</h2>
+<p> BackGround Color: <span id ="bcolor"></span></p>
+<p>Text Color: <span id = "tcolor"></span></p>
+<script>
+//add scroll process bar
+window.addEventListener("scroll", function () {
+  var x = document.getElementById("progressbar");
+  var d = Math.max(
+          document.documentElement.clientHeight,
+          document.body.scrollHeight,
+          document.documentElement.scrollHeight,
+          document.body.offsetHeight,
+          document.documentElement.offsetHeight
+      )
+  var s = window.pageYOffset,
+      c = window.innerHeight;
+  var scrollp=(s/(d-c))*100;
+      console.log('r '+scrollp);
+    x.value = scrollp;
+}, false);
+var page = document.getElementById('page');
+//select color from the table
+var text = document.getElementById('text');
+var tcolor = document.getElementById('tcolor');
+var bcolor = document.getElementById('bcolor');
+var bblue = document.getElementById('bblue');
+var tblue = document.getElementById('tblue');
+var bred = document.getElementById('bred');
+var tred = document.getElementById('tred');
+var bgreen = document.getElementById('bgreen');
+var tgreen = document.getElementById('tgreen');
+function refreshBackGround(){
+  page.style['background-color'] = 'rgb(255, 255, 255)';
+}
+function refreshText(){
+  text.style['color'] = 'rgb(0,0,0)';
+}
+bblue.addEventListener('mouseover',function(){
+    page.style['background-color'] = 'rgb(0, 0, 255)';
+    bblue.addEventListener('mouseout',refreshBackGround);
+});
+bblue.addEventListener('click',function(){
+    page.style['background-color'] = 'rgb(0, 0, 255)';
+    bblue.removeEventListener('mouseout',refreshBackGround);
+    bcolor.innerHTML = page.style.backgroundColor;
+});
+bred.addEventListener('mouseover',function(){
+    page.style['background-color'] = 'rgb(255, 0, 0)';
+    bred.addEventListener('mouseout',refreshBackGround);
+});
+bred.addEventListener('click',function(){
+    page.style['background-color'] = 'rgb(255, 0, 0)';
+    bred.removeEventListener('mouseout',refreshBackGround);
+    bcolor.innerHTML =  page.style.backgroundColor;
+});
+bgreen.addEventListener('mouseover',function(){
+    page.style['background-color'] = 'rgb(0, 255, 0)';
+    bgreen.addEventListener('mouseout',refreshBackGround);
+});
+bgreen.addEventListener('click',function(){
+    page.style['background-color'] = 'rgb(0, 255, 0)';
+    bgreen.removeEventListener('mouseout',refreshBackGround);
+    bcolor.innerHTML =  page.style.backgroundColor;
+});
+tblue.addEventListener('mouseover',function(){
+  text.style['color'] = 'rgb(0, 0, 255)';
+  tblue.addEventListener('mouseout',refreshText);
+});
+tblue.addEventListener('click',function(){
+  text.style['color']= 'rgb(0,0,255)';
+  tblue.removeEventListener('mouseout',refreshText);
+  tcolor.innerHTML =text.style.color;
+});
+tred.addEventListener('mouseover',function(){
+    text.style['color'] = 'rgb(255, 0, 0)';
+    tred.addEventListener('mouseout',refreshText);
+});
+tred.addEventListener('click',function(){
+  text.style['color']= 'rgb(255,0,0)';
+  tred.removeEventListener('mouseout',refreshText);
+  tcolor.innerHTML = text.style.color;
+});
+tgreen.addEventListener('mouseover',function(){
+    text.style['color'] = 'rgb(0, 255, 0)';
+    tgreen.addEventListener('mouseout',refreshText);
+});
+tgreen.addEventListener('click',function(){
+  text.style['color']= 'rgb(0,255,0)';
+  tgreen.removeEventListener('mouseout',refreshText);
+  tcolor.innerHTML = text.style.color;
+});
+</script>
+</body>
+</html>
